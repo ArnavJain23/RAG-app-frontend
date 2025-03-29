@@ -50,7 +50,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-4">Cannot Connect to Backend</h2>
           <p className="mb-4">{apiStatus.message || "The RAG API server is not available."}</p>
           <p className="text-sm text-muted-foreground">
-            Please make sure the backend server is running at http://localhost:5000
+            Please make sure the backend server is running at http://localhost:8080
           </p>
         </div>
       </div>

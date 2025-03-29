@@ -4,8 +4,8 @@
 
 // API base URL - change this to your deployed backend URL for production
 const API_BASE_URL = typeof window !== 'undefined' 
-  ? (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000')
-  : 'http://localhost:5000';
+  ? (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080')
+  : 'http://localhost:8080';
 
 /**
  * Send a chat message to the backend
