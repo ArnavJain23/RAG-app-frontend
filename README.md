@@ -40,3 +40,12 @@ The following features can be added to further enhance the frontend application:
 
 4. **Testing and Quality Assurance**:
    - Implement unit and integration tests using testing libraries like Jest and React Testing Library to ensure the reliability and stability of the application.
+
+## Challenges Faced
+
+- **Connecting Frontend and Backend**:
+  - Establishing communication between the frontend and backend required the creation of a RESTful API in the backend.
+  - The frontend needed to make HTTP requests to these API endpoints to retrieve and send data.
+  
+- **CORS Issues**:
+  - Encountered Cross-Origin Resource Sharing (CORS) issues when the frontend and backend were hosted on different ports. This required configuring Flask-CORS in the backend to allow requests from the frontend.
