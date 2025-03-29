@@ -3,6 +3,11 @@ export interface Message {
   content: string
   role: "user" | "assistant"
   createdAt: string
+  metadata?: {
+    sources?: any[]
+    processingTime?: number
+  }
+  error?: boolean
 }
 
 export interface Chat {
