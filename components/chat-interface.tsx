@@ -6,16 +6,17 @@ import { useState, useRef, useEffect } from "react"
 import type { Message } from "@/types"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { Send } from "lucide-react"
+import { Send, AlertCircle, RefreshCw } from "lucide-react"
 import MessageItem from "./message-item"
 
 interface ChatInterfaceProps {
   messages: Message[]
   onSendMessage: (content: string) => void
   isLoading: boolean
+  onReset?: () => void
 }
 
-export default function ChatInterface({ messages, onSendMessage, isLoading }: ChatInterfaceProps) {
+export default function ChatInterface({ messages, onSendMessage, isLoading, onReset }: ChatInterfaceProps) {
   const [input, setInput] = useState("")
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -81,7 +82,9 @@ export default function ChatInterface({ messages, onSendMessage, isLoading }: Ch
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center space-y-6 max-w-md px-4">
             <h2 className="text-2xl font-semibold text-primary">Welcome to your RAG Chat</h2>
-            <p className="text-muted-foreground">Ask a question to get started with your knowledge base.</p>
+            <p className="text-muted-foreground">
+              Ask a question about "Introduction to Algorithms 3rd Edition" to get started.
+            </p>
           </div>
         </div>
       )}
@@ -92,6 +95,20 @@ export default function ChatInterface({ messages, onSendMessage, isLoading }: Ch
           hasSubmitted ? "border-t p-4" : "absolute left-1/2 -translate-x-1/2 bottom-24 w-full max-w-2xl px-4"
         }`}
       >
+        <div className="flex justify-between items-center mb-2">
+          {hasSubmitted && onReset && (
+            <Button variant="outline" size="sm" onClick={onReset} disabled={isLoading}>
+              <RefreshCw className="h-4 w-4 mr-2" />
+              Reset Chat
+            </Button>
+          )}
+          {messages.some(m => m.error) && (
+            <div className="flex items-center text-destructive text-sm">
+              <AlertCircle className="h-4 w-4 mr-1" />
+              Connection error - Please check that the backend is running
+            </div>
+          )}
+        </div>
         <form onSubmit={handleSubmit} className="flex space-x-2">
           <Textarea
             ref={textareaRef}
